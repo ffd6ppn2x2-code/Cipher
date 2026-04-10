@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #08111f;
+    --surface: #0d1b2e;
+    --card: #111f33;
+    --border: #1e3a5f;
+    --primary: #00d4ff;
+    --accent: #0099cc;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --subtle: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #08111f;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0d1b2e; }
+  ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #00d4ff; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm
+           bg-cipher-primary text-cipher-bg transition-all duration-200
+           hover:bg-cipher-accent hover:shadow-lg;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm
+           border border-cipher-border text-cipher-subtle transition-all duration-200
+           hover:border-cipher-primary hover:text-cipher-primary;
+  }
+
+  .card {
+    @apply bg-cipher-card border border-cipher-border rounded-xl p-6
+           transition-all duration-300;
+  }
+
+  .card:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.08);
+  }
+
+  .section-label {
+    @apply text-cipher-primary text-xs font-semibold tracking-widest uppercase mb-3;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+  }
+}
