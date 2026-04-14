@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 interface FadeInOnScrollProps {
   children: React.ReactNode
@@ -16,8 +16,26 @@ export function FadeInOnScroll({
   className,
   direction = 'up',
 }: FadeInOnScrollProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '0px 0px -60px 0px' })
+  const [isVisible, setIsVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   const directionMap = {
     up:    { y: 28, x: 0 },
@@ -31,7 +49,7 @@ export function FadeInOnScroll({
     <motion.div
       ref={ref}
       initial={{ opacity: 0, ...directionMap[direction] }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+      animate={isVisible ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...directionMap[direction] }}
       transition={{ duration: 0.55, delay, ease: [0.25, 0.1, 0.25, 1] }}
       className={className}
     >
