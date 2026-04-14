@@ -39,5 +39,3 @@ export function FadeInOnScroll({
     </motion.div>
   )
 }
-
-export { FadeInOnScroll }
