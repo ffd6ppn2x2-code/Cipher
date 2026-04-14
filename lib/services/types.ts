@@ -16,3 +16,5 @@ export interface ServiceCategory {
   icon: string
   offerings: ServiceOffering[]
 }
+
+export type { ServiceOffering, ServiceCategory }

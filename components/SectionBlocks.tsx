@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ServiceCategory } from '@/lib/services/types'
+import { ServiceCategory, ServiceOffering } from '@/lib/services/types'
 import { ServiceIcon } from './ui/ServiceIcon'
 import { FadeInOnScroll } from './ui/FadeInOnScroll'
 
@@ -23,7 +23,7 @@ export function SectionBlocks({ category }: { category: ServiceCategory }) {
 
         {/* Offerings grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {category.offerings.map((offering, i) => (
+          {category.offerings.map((offering: ServiceOffering, i: number) => (
             <FadeInOnScroll key={offering.title} delay={i * 0.08}>
               <div className="card h-full flex flex-col">
                 <h3 className="font-semibold text-cipher-text mb-2">{offering.title}</h3>
@@ -35,7 +35,7 @@ export function SectionBlocks({ category }: { category: ServiceCategory }) {
                       Why It Matters
                     </p>
                     <ul className="space-y-1">
-                      {offering.whyItMatters.map((item) => (
+                      {offering.whyItMatters.map((item: string) => (
                         <li key={item} className="text-xs text-cipher-muted flex gap-2">
                           <span className="text-cipher-primary mt-0.5 flex-shrink-0">›</span>
                           {item}
@@ -51,7 +51,7 @@ export function SectionBlocks({ category }: { category: ServiceCategory }) {
                       Capabilities
                     </p>
                     <ul className="space-y-1">
-                      {offering.capabilities.slice(0, 4).map((item) => (
+                      {offering.capabilities.slice(0, 4).map((item: string) => (
                         <li key={item} className="text-xs text-cipher-muted flex gap-2">
                           <span className="text-cipher-primary mt-0.5 flex-shrink-0">›</span>
                           {item}
