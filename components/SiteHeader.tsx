@@ -5,20 +5,48 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { serviceCategories } from '@/lib/services'
-import { useLanguage } from '@/lib/i18n/context'
+
+// Fallback translations in case useLanguage hook fails
+const fallbackTranslations = {
+  nav: {
+    home: 'Home',
+    services: 'Services',
+    about: 'About',
+    contact: 'Contact',
+    getInTouch: 'Get in Touch'
+  },
+  langToggle: 'عربي'
+}
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  const { lang, setLang, t } = useLanguage()
+  
+  // Safely use the language hook with fallbacks
+  let lang = 'en'
+  let setLang = (l: string) => {}
+  let t = fallbackTranslations
+  
+  try {
+    // Dynamically import to avoid circular dependencies during build
+    const { useLanguage } = require('@/lib/i18n/context')
+    const languageData = useLanguage()
+    if (languageData) {
+      lang = languageData.lang || 'en'
+      setLang = languageData.setLang || (() => {})
+      t = languageData.t || fallbackTranslations
+    }
+  } catch (error) {
+    console.warn('Language context not available, using fallback translations')
+  }
 
   const navLinks = [
-    { href: '/', label: t.nav.home },
-    { href: '/services', label: t.nav.services },
-    { href: '/about', label: t.nav.about },
-    { href: '/contact', label: t.nav.contact },
+    { href: '/', label: t?.nav?.home || 'Home' },
+    { href: '/services', label: t?.nav?.services || 'Services' },
+    { href: '/about', label: t?.nav?.about || 'About' },
+    { href: '/contact', label: t?.nav?.contact || 'Contact' },
   ]
 
   useEffect(() => {
@@ -80,13 +108,17 @@ export function SiteHeader() {
           <div className="hidden md:flex items-center gap-3">
             {/* Language toggle */}
             <button
-              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+              onClick={() => {
+                if (setLang) {
+                  setLang(lang === 'en' ? 'ar' : 'en')
+                }
+              }}
               className="px-3 py-1.5 rounded-md text-sm font-semibold border border-cipher-border
                          text-cipher-subtle hover:text-cipher-primary hover:border-cipher-primary/50
                          transition-all duration-200"
               aria-label="Switch language"
             >
-              {t.langToggle}
+              {t?.langToggle || 'عربي'}
             </button>
             <Link
               href="/contact"
@@ -94,7 +126,7 @@ export function SiteHeader() {
                          transition-all duration-200 hover:bg-cipher-accent"
               style={{ boxShadow: '0 0 16px rgba(0,212,255,0.25)' }}
             >
-              {t.nav.getInTouch}
+              {t?.nav?.getInTouch || 'Get in Touch'}
             </Link>
           </div>
 
@@ -146,18 +178,22 @@ export function SiteHeader() {
               ))}
               {/* Mobile language toggle */}
               <button
-                onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+                onClick={() => {
+                  if (setLang) {
+                    setLang(lang === 'en' ? 'ar' : 'en')
+                  }
+                }}
                 className="mt-2 py-2.5 text-sm font-semibold text-cipher-primary text-left
                            border-b border-cipher-border/50"
               >
-                {t.langToggle}
+                {t?.langToggle || 'عربي'}
               </button>
               <Link
                 href="/contact"
                 className="mt-3 px-4 py-2.5 rounded-lg text-sm font-semibold text-center
                            bg-cipher-primary text-cipher-bg"
               >
-                {t.nav.getInTouch}
+                {t?.nav?.getInTouch || 'Get in Touch'}
               </Link>
             </nav>
           </motion.div>
