@@ -31,6 +31,9 @@ Thumbs.db
 # aider
 .aider*
 
+# claude
+.claude/
+
 # testing
 coverage/
 .nyc_output/

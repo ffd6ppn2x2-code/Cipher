@@ -5,42 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { serviceCategories } from '@/lib/services'
-
-// Fallback translations in case useLanguage hook fails
-const fallbackTranslations = {
-  nav: {
-    home: 'Home',
-    services: 'Services',
-    about: 'About',
-    contact: 'Contact',
-    getInTouch: 'Get in Touch'
-  },
-  langToggle: 'عربي'
-}
+import { useLanguage } from '@/lib/i18n/context'
 
 export function SiteHeader() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  
-  // Safely use the language hook with fallbacks
-  let lang = 'en'
-  let setLang = (l: string) => {}
-  let t = fallbackTranslations
-  
-  try {
-    // Dynamically import to avoid circular dependencies during build
-    const { useLanguage } = require('@/lib/i18n/context')
-    const languageData = useLanguage()
-    if (languageData) {
-      lang = languageData.lang || 'en'
-      setLang = languageData.setLang || (() => {})
-      t = languageData.t || fallbackTranslations
-    }
-  } catch (error) {
-    console.warn('Language context not available, using fallback translations')
-  }
+  const { lang, setLang, t } = useLanguage()
 
   const navLinks = [
     { href: '/', label: t?.nav?.home || 'Home' },
@@ -74,8 +46,7 @@ export function SiteHeader() {
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="w-7 h-7 rounded bg-cipher-primary flex items-center justify-center">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M7 1L13 4V10L7 13L1 10V4L7 1Z" stroke="#08111f" strokeWidth="1.5" fill="none"/>
-                <path d="M7 4L10 5.5V8.5L7 10L4 8.5V5.5L7 4Z" fill="#08111f"/>
+                <path d="M7 0L14 7L7 14L0 7Z" fill="#08111f" />
               </svg>
             </div>
             <span className="text-lg font-bold tracking-tight text-cipher-text">Cipher</span>
@@ -108,11 +79,7 @@ export function SiteHeader() {
           <div className="hidden md:flex items-center gap-3">
             {/* Language toggle */}
             <button
-              onClick={() => {
-                if (setLang) {
-                  setLang(lang === 'en' ? 'ar' : 'en')
-                }
-              }}
+              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
               className="px-3 py-1.5 rounded-md text-sm font-semibold border border-cipher-border
                          text-cipher-subtle hover:text-cipher-primary hover:border-cipher-primary/50
                          transition-all duration-200"
@@ -178,11 +145,7 @@ export function SiteHeader() {
               ))}
               {/* Mobile language toggle */}
               <button
-                onClick={() => {
-                  if (setLang) {
-                    setLang(lang === 'en' ? 'ar' : 'en')
-                  }
-                }}
+                onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
                 className="mt-2 py-2.5 text-sm font-semibold text-cipher-primary text-left
                            border-b border-cipher-border/50"
               >
@@ -258,45 +221,48 @@ function NavItem({
 
 function ServicesDropdown({ lang }: { lang: string }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8, scale: 0.97 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.97 }}
-      transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-72"
-    >
-      <div className="bg-cipher-surface border border-cipher-border rounded-xl shadow-2xl
-                      shadow-black/40 overflow-hidden">
-        {serviceCategories.map((cat) => (
-          <Link
-            key={cat.slug}
-            href={`/services#${cat.slug}`}
-            className="flex items-start gap-3 px-4 py-3 hover:bg-cipher-card
-                       transition-colors duration-150 group border-b border-cipher-border/50 last:border-0"
-          >
-            <div className="mt-0.5 w-7 h-7 rounded-md bg-cipher-primary/10 flex items-center
-                            justify-center flex-shrink-0 group-hover:bg-cipher-primary/20
-                            transition-colors duration-150">
-              <ServiceIcon name={cat.icon} />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-cipher-text group-hover:text-cipher-primary
-                            transition-colors duration-150">
-                {cat.shortTitle}
-              </p>
-              <p className="text-xs text-cipher-muted mt-0.5 leading-snug line-clamp-2">
-                {cat.tagline}
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </motion.div>
+    <div       className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[720px]">
+      <motion.div
+        initial={{ opacity: 0, y: 8, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 8, scale: 0.97 }}
+        transition={{ duration: 0.18, ease: 'easeOut' }}
+      >
+        <div className="bg-cipher-surface border border-cipher-border rounded-xl shadow-2xl
+                        shadow-black/40 p-4">
+          <div className="grid grid-cols-3 gap-3">
+            {serviceCategories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/services#${cat.slug}`}
+                className="flex flex-col items-center gap-3 px-4 py-4 rounded-lg hover:bg-cipher-card
+                           transition-colors duration-150 group"
+              >
+                <div className="w-12 h-12 rounded-lg bg-cipher-primary/10 flex items-center
+                                justify-center flex-shrink-0 group-hover:bg-cipher-primary/20
+                                transition-colors duration-150">
+                  <ServiceIcon name={cat.icon} size={22} />
+                </div>
+                <div className="text-center">
+                  <p className="text-[15px] font-semibold text-cipher-text group-hover:text-cipher-primary
+                                transition-colors duration-150 leading-tight">
+                    {cat.shortTitle}
+                  </p>
+                  <p className="text-xs text-cipher-muted mt-1 leading-snug line-clamp-2">
+                    {cat.tagline}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
   )
 }
 
-function ServiceIcon({ name }: { name: string }) {
-  const props = { width: 14, height: 14, stroke: '#00d4ff', fill: 'none', strokeWidth: 1.5 }
+function ServiceIcon({ name, size = 14 }: { name: string; size?: number }) {
+  const props = { width: size, height: size, stroke: '#00d4ff', fill: 'none', strokeWidth: 1.5 }
   if (name === 'shield') return (
     <svg {...props} viewBox="0 0 16 16">
       <path d="M8 1L14 4V9C14 12 11 14.5 8 15.5C5 14.5 2 12 2 9V4L8 1Z" />

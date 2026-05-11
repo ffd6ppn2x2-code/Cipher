@@ -16,8 +16,7 @@ export function SiteFooter() {
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-7 h-7 rounded bg-cipher-primary flex items-center justify-center">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M7 1L13 4V10L7 13L1 10V4L7 1Z" stroke="#08111f" strokeWidth="1.5" fill="none"/>
-                  <path d="M7 4L10 5.5V8.5L7 10L4 8.5V5.5L7 4Z" fill="#08111f"/>
+                  <path d="M7 0L14 7L7 14L0 7Z" fill="#08111f" />
                 </svg>
               </div>
               <span className="text-base font-bold tracking-tight text-cipher-text">Cipher</span>

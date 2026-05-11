@@ -1,29 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { serviceCategories } from '@/lib/services'
 import { ServiceCard } from '@/components/ServiceCard'
 import { CTASection } from '@/components/ui/CTASection'
-import { FadeInOnScroll } from '@/components/ui/FadeInOnScroll'
+import { HeroParticles } from '@/components/ui/HeroParticles'
 import { useLanguage } from '@/lib/i18n/context'
-
-const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-}
 
 export default function HomePage() {
   const { t } = useLanguage()
 
   const stats = [
     { value: '24/7', label: t.stats.threatMonitoring },
-    { value: '4', label: t.stats.servicePillars },
+    { value: '3', label: t.stats.servicePillars },
     { value: '100%', label: t.stats.clientFocus },
     { value: 'Global', label: t.stats.coverage },
   ]
@@ -43,66 +32,60 @@ export default function HomePage() {
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 70%)' }}
         />
+        <HeroParticles />
         <div className="relative max-w-5xl mx-auto text-center pt-24">
-          <motion.div variants={container} initial="hidden" animate="show">
-            <motion.div variants={item} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
-                         border border-cipher-border bg-cipher-surface/60 text-xs text-cipher-subtle mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-cipher-primary animate-pulse" />
-              {t.hero.badge}
-            </motion.div>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
+                       border border-cipher-border bg-cipher-surface/60 text-xs text-cipher-subtle mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-cipher-primary animate-pulse" />
+            {t.hero.badge}
+          </div>
 
-            <motion.h1 variants={item} className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-              <span className="text-cipher-text">{t.hero.headline1}</span>
-              <br />
-              <span className="gradient-text">{t.hero.headline2}</span>
-              <br />
-              <span className="text-cipher-text">{t.hero.headline3}</span>
-            </motion.h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+            <span className="text-cipher-text">{t.hero.headline1}</span>
+            <br />
+            <span className="gradient-text">{t.hero.headline2}</span>
+            <br />
+            <span className="text-cipher-text">{t.hero.headline3}</span>
+          </h1>
 
-            <motion.p variants={item} className="text-lg text-cipher-subtle max-w-2xl mx-auto leading-relaxed mb-10">
-              {t.hero.subheadline}
-            </motion.p>
+          <p className="text-lg text-cipher-subtle max-w-2xl mx-auto leading-relaxed mb-10">
+            {t.hero.subheadline}
+          </p>
 
-            <motion.div variants={item} className="flex flex-wrap gap-4 justify-center mb-16">
-              <Link href="/services" className="btn-primary">
-                {t.hero.exploreServices}
-                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-              <Link href="/contact" className="btn-ghost">
-                {t.hero.contactUs}
-              </Link>
-            </motion.div>
+          <div className="flex flex-wrap gap-4 justify-center mb-16">
+            <Link href="/services" className="btn-primary">
+              {t.hero.exploreServices}
+              <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+            <Link href="/contact" className="btn-ghost">
+              {t.hero.contactUs}
+            </Link>
+          </div>
 
-            <motion.div
-              variants={item}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-cipher-border/40 rounded-xl overflow-hidden"
-            >
-              {stats.map((s) => (
-                <div key={s.label} className="bg-cipher-surface py-6 px-4 text-center">
-                  <p className="text-2xl font-bold gradient-text">{s.value}</p>
-                  <p className="text-xs text-cipher-muted mt-1">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-cipher-border/40 rounded-xl overflow-hidden">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-cipher-surface py-6 px-4 text-center">
+                <p className="text-2xl font-bold gradient-text">{s.value}</p>
+                <p className="text-xs text-cipher-muted mt-1">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Services overview */}
       <section className="py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <FadeInOnScroll>
-            <p className="section-label text-center">{t.servicesSection.label}</p>
-            <h2 className="text-3xl font-bold text-cipher-text text-center mb-3">
-              {t.servicesSection.heading}
-            </h2>
-            <p className="text-cipher-subtle text-center max-w-2xl mx-auto leading-relaxed mb-12">
-              {t.servicesSection.description}
-            </p>
-          </FadeInOnScroll>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <p className="section-label text-center">{t.servicesSection.label}</p>
+          <h2 className="text-3xl font-bold text-cipher-text text-center mb-3">
+            {t.servicesSection.heading}
+          </h2>
+          <p className="text-cipher-subtle text-center max-w-2xl mx-auto leading-relaxed mb-12">
+            {t.servicesSection.description}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {serviceCategories.map((cat, i) => (
               <ServiceCard key={cat.slug} category={cat} index={i} />
             ))}
@@ -114,24 +97,20 @@ export default function HomePage() {
       <section className="py-24 px-6 lg:px-8 bg-cipher-surface/40">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <FadeInOnScroll>
+            <div>
               <p className="section-label">{t.whyCipher.label}</p>
               <h2 className="text-3xl font-bold text-cipher-text mb-5">
                 {t.whyCipher.heading}
               </h2>
               <p className="text-cipher-subtle leading-relaxed mb-6">{t.whyCipher.p1}</p>
               <p className="text-cipher-subtle leading-relaxed">{t.whyCipher.p2}</p>
-            </FadeInOnScroll>
+            </div>
 
-            <FadeInOnScroll delay={0.15} direction="left">
+            <div>
               <div className="grid grid-cols-1 gap-4">
-                {t.whyCipher.points.map((point, i) => (
-                  <motion.div
+                {t.whyCipher.points.map((point) => (
+                  <div
                     key={point.title}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1, duration: 0.45 }}
                     className="flex gap-4 p-4 rounded-xl bg-cipher-card border border-cipher-border/60"
                   >
                     <div className="w-8 h-8 rounded-md bg-cipher-primary/10 flex items-center justify-center flex-shrink-0">
@@ -143,10 +122,10 @@ export default function HomePage() {
                       <p className="font-semibold text-cipher-text text-sm">{point.title}</p>
                       <p className="text-cipher-muted text-xs mt-0.5 leading-relaxed">{point.desc}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-            </FadeInOnScroll>
+            </div>
           </div>
         </div>
       </section>

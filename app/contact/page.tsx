@@ -1,7 +1,7 @@
 'use client'
 
 import { ContactForm } from '@/components/ContactForm'
-import { FadeInOnScroll } from '@/components/ui/FadeInOnScroll'
+import { WorldMap } from '@/components/WorldMap'
 import { useLanguage } from '@/lib/i18n/context'
 
 export default function ContactPage() {
@@ -20,9 +20,9 @@ export default function ContactPage() {
         style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,212,255,0.05) 0%, transparent 70%)' }}
       />
       <div className="max-w-5xl mx-auto relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
           {/* Left - info */}
-          <FadeInOnScroll>
+          <div>
             <p className="section-label">{t.contact.label}</p>
             <h1 className="text-4xl font-bold text-cipher-text mb-4">{t.contact.heading}</h1>
             <p className="text-cipher-subtle leading-relaxed mb-8">{t.contact.desc}</p>
@@ -41,15 +41,18 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-          </FadeInOnScroll>
+          </div>
 
           {/* Right - form */}
-          <FadeInOnScroll delay={0.15} direction="left">
+          <div>
             <div className="card">
               <ContactForm />
             </div>
-          </FadeInOnScroll>
+          </div>
         </div>
+
+        {/* Full-width map */}
+        <WorldMap />
       </div>
     </section>
   )

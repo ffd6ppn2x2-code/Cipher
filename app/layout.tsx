@@ -7,12 +7,12 @@ import { Providers } from '@/components/Providers'
 export const metadata: Metadata = {
   title: 'Cipher | Cybersecurity & IT Expertise',
   description:
-    'Cipher empowers enterprises with transformative cybersecurity solutions — from InfoSec consulting and offensive security to DFIR and cloud security.',
+    'Cipher empowers enterprises with transformative cybersecurity solutions — from InfoSec consulting and offensive security to cloud security.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className="bg-cipher-bg text-cipher-text antialiased">
         <Providers>
           <SiteHeader />

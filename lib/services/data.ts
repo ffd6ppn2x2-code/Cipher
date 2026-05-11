@@ -156,54 +156,6 @@ export const serviceCategories: ServiceCategory[] = [
     ],
   },
   {
-    slug: 'digital-forensics-incident-response',
-    title: 'Digital Forensics & Incident Response',
-    shortTitle: 'DFIR',
-    tagline: 'Investigate, contain, and recover with confidence.',
-    icon: 'search',
-    description:
-      "Cipher's DFIR services combine deep technical expertise, advanced forensic tools, and real-world threat intelligence to deliver rapid, effective, and defensible incident response capabilities.",
-    offerings: [
-      {
-        title: 'Compromise Assessment',
-        description:
-          "Detect hidden threats before they disrupt your business. Cipher's Compromise Assessment gives enterprises a clear view into latent threats, combining forensic analysis and intelligence-driven investigation.",
-        capabilities: [
-          "Intelligence-Led Discovery using advanced threat intelligence",
-          "Deep Forensic Analysis including artifact and binary review",
-          "Integrated Risk Insights with prioritized remediation roadmap",
-        ],
-      },
-      {
-        title: 'Incident Response Retainer',
-        description:
-          "Rapid Access to Expert Responders. Cipher's IR Retainer provides pre-contracted access to DFIR experts with guaranteed response times and predictable budgeting.",
-        benefits: [
-          "Guaranteed Response Time with immediate expert engagement",
-          "Predictable Budgeting with pre-defined retainer costs",
-          "Proactive Preparedness through tabletop exercises",
-          "Continuous Threat Insights and advisory services",
-        ],
-      },
-      {
-        title: 'Tabletop Exercise (TTX)',
-        description:
-          "Build confidence. Sharpen decisions. Strengthen resilience. Cipher's TTX service simulates high-stakes cyber incidents to test your teams' readiness.",
-        capabilities: [
-          "Intelligence-Driven Scenario Planning (ransomware, APT, insider threat)",
-          "Interactive, Role-Based Engagement for all teams",
-          "Continuous Learning and post-exercise improvement guidance",
-        ],
-        benefits: [
-          "Validated Readiness under realistic pressure",
-          "Enhanced Cross-Functional Coordination",
-          "Actionable Intelligence for IR plan improvement",
-          "Regulatory and Compliance Support (NIST, ISO, MITRE ATT&CK)",
-        ],
-      },
-    ],
-  },
-  {
     slug: 'cloud-security',
     title: 'Cloud Security Services',
     shortTitle: 'Cloud Security',

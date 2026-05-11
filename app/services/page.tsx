@@ -2,7 +2,6 @@ import { serviceCategories } from '@/lib/services'
 import { SectionBlocks } from '@/components/SectionBlocks'
 import { ServiceCategoryNav } from '@/components/ServiceCategoryNav'
 import { CTASection } from '@/components/ui/CTASection'
-import { FadeInOnScroll } from '@/components/ui/FadeInOnScroll'
 
 export default function ServicesPage() {
   return (
@@ -16,17 +15,15 @@ export default function ServicesPage() {
           }}
         />
         <div className="max-w-7xl mx-auto text-center relative">
-          <FadeInOnScroll>
-            <p className="section-label">What We Offer</p>
-            <h1 className="text-4xl sm:text-5xl font-bold text-cipher-text mb-4">
-              Our Services
-            </h1>
-            <p className="text-cipher-subtle max-w-2xl mx-auto leading-relaxed mb-10">
-              Comprehensive cybersecurity solutions designed to protect your enterprise at every layer —
-              from strategic consulting to active threat response and cloud security.
-            </p>
-            <ServiceCategoryNav />
-          </FadeInOnScroll>
+          <p className="section-label">What We Offer</p>
+          <h1 className="text-4xl sm:text-5xl font-bold text-cipher-text mb-4">
+            Our Services
+          </h1>
+          <p className="text-cipher-subtle max-w-2xl mx-auto leading-relaxed mb-10">
+            Comprehensive cybersecurity solutions designed to protect your enterprise at every layer —
+            from strategic consulting to active threat response and cloud security.
+          </p>
+          <ServiceCategoryNav />
         </div>
       </section>
 
