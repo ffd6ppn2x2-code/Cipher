@@ -14,5 +14,6 @@ export interface ServiceCategory {
   tagline: string
   description: string
   icon: string
+  navTitle?: string
   offerings: ServiceOffering[]
 }

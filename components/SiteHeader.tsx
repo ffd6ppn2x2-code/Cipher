@@ -246,7 +246,7 @@ function ServicesDropdown({ lang }: { lang: string }) {
                 <div className="text-center">
                   <p className="text-[15px] font-semibold text-cipher-text group-hover:text-cipher-primary
                                 transition-colors duration-150 leading-tight">
-                    {cat.shortTitle}
+                    {cat.navTitle ?? cat.shortTitle}
                   </p>
                   <p className="text-xs text-cipher-muted mt-1 leading-snug line-clamp-2">
                     {cat.tagline}
