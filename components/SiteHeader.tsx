@@ -221,7 +221,7 @@ function NavItem({
 
 function ServicesDropdown({ lang }: { lang: string }) {
   return (
-    <div       className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[720px]">
+    <div       className="absolute top-full left-1/2 -translate-x-1/2 pt-3 max-w-[90vw]">
       <motion.div
         initial={{ opacity: 0, y: 8, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -230,13 +230,13 @@ function ServicesDropdown({ lang }: { lang: string }) {
       >
         <div className="bg-cipher-surface border border-cipher-border rounded-xl shadow-2xl
                         shadow-black/40 p-4">
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex gap-4 overflow-x-auto pb-2">
             {serviceCategories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/services#${cat.slug}`}
-                className="flex flex-col items-center gap-3 px-4 py-4 rounded-lg hover:bg-cipher-card
-                           transition-colors duration-150 group"
+                className="flex flex-col items-center gap-3 px-5 py-4 rounded-lg hover:bg-cipher-card
+                           transition-colors duration-150 group flex-shrink-0 w-44"
               >
                 <div className="w-12 h-12 rounded-lg bg-cipher-primary/10 flex items-center
                                 justify-center flex-shrink-0 group-hover:bg-cipher-primary/20
@@ -278,9 +278,14 @@ function ServiceIcon({ name, size = 14 }: { name: string; size?: number }) {
       <circle cx="7" cy="7" r="4.5" /><path d="M10.5 10.5L14 14" strokeLinecap="round" />
     </svg>
   )
+  if (name === 'monitor') return (
+    <svg {...props} viewBox="0 0 16 16">
+      <rect x="1" y="2" width="14" height="9" rx="1" /><path d="M5 14h6" strokeLinecap="round" /><path d="M8 11v3" strokeLinecap="round" />
+    </svg>
+  )
   if (name === 'cloud') return (
     <svg {...props} viewBox="0 0 16 16">
-      <path d="M12 11H11.5A3.5 3.5 0 0 0 8.4 6.1 4 4 0 1 0 4 11H12Z" />
+      <path d="M11.5 12H4.5C2.57 12 1 10.43 1 8.5C1 6.79 2.33 5.36 4.05 5.05C4.55 3.33 6.18 2.07 8.12 2C10.33 1.92 12.23 3.51 12.7 5.6C14.19 5.97 15.2 7.43 15.02 9.12C14.85 10.6 13.7 11.83 12.17 11.98L11.5 12Z" />
     </svg>
   )
   return null
