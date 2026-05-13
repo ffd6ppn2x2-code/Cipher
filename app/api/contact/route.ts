@@ -1,17 +1,34 @@
 import { NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || '',
-  port: Number(process.env.SMTP_PORT) || 587,
-  secure: Number(process.env.SMTP_PORT) === 465,
-  auth: {
-    user: process.env.SMTP_USER || '',
-    pass: process.env.SMTP_PASS || '',
-  },
-})
+const SMTP_HOST = process.env.SMTP_HOST || 'smtp.gmail.com'
+const SMTP_PORT = Number(process.env.SMTP_PORT) || 587
+const SMTP_USER = process.env.SMTP_USER
+const SMTP_PASS = process.env.SMTP_PASS
+const CONTACT_RECIPIENT = process.env.CONTACT_RECIPIENT || 'Info@cipherop.com'
+
+const transportConfigValid = !!(SMTP_USER && SMTP_PASS)
+
+const transporter = transportConfigValid
+  ? nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_PORT === 465,
+      auth: {
+        user: SMTP_USER!,
+        pass: SMTP_PASS!,
+      },
+    })
+  : null
 
 export async function POST(request: Request) {
+  if (!transportConfigValid) {
+    return NextResponse.json(
+      { error: 'Mail server not configured. Set SMTP_USER and SMTP_PASS environment variables.' },
+      { status: 500 },
+    )
+  }
+
   try {
     const { name, email, company, service, message } = await request.json()
 
@@ -38,9 +55,9 @@ export async function POST(request: Request) {
 </body>
 </html>`
 
-    await transporter.sendMail({
-      from: `"Cipher Website" <${process.env.SMTP_USER}>`,
-      to: 'Info@cipherop.com',
+    await transporter!.sendMail({
+      from: `"Cipher Website" <${SMTP_USER}>`,
+      to: CONTACT_RECIPIENT,
       replyTo: email,
       subject: `New Inquiry from ${name}${company ? ` (${company})` : ''}`,
       html,
@@ -48,7 +65,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Contact email error:', error)
-    return NextResponse.json({ error: 'Failed to send message. Please try again later.' }, { status: 500 })
+    const message = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Contact email error:', message)
+    return NextResponse.json({ error: `Failed to send message. ${message}` }, { status: 500 })
   }
 }

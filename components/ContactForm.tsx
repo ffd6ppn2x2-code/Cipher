@@ -5,35 +5,43 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/i18n/context'
 
 export function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
-  const { t } = useLanguage()
-  const f = t.contact.form
+    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+    const [errorMsg, setErrorMsg] = useState('')
+    const { t } = useLanguage()
+    const f = t.contact.form
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setStatus('sending')
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      setStatus('sending')
+      setErrorMsg('')
 
-    const form = e.currentTarget
-    const data = {
-      name: (form.elements.namedItem('name') as HTMLInputElement).value,
-      email: (form.elements.namedItem('email') as HTMLInputElement).value,
-      company: (form.elements.namedItem('company') as HTMLInputElement).value,
-      service: (form.elements.namedItem('service') as HTMLSelectElement).value,
-      message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      const form = e.currentTarget
+      const data = {
+        name: (form.elements.namedItem('name') as HTMLInputElement).value,
+        email: (form.elements.namedItem('email') as HTMLInputElement).value,
+        company: (form.elements.namedItem('company') as HTMLInputElement).value,
+        service: (form.elements.namedItem('service') as HTMLSelectElement).value,
+        message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
+      }
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+        const json = await res.json()
+        if (!res.ok) {
+          setErrorMsg(json.error || 'Failed to send')
+          setStatus('error')
+          return
+        }
+        setStatus('sent')
+      } catch {
+        setErrorMsg('Network error. Check your connection and try again.')
+        setStatus('error')
+      }
     }
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) throw new Error('Failed to send')
-      setStatus('sent')
-    } catch {
-      setStatus('error')
-    }
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
@@ -122,7 +130,7 @@ export function ContactForm() {
       ) : status === 'error' ? (
         <div>
           <p className="mb-3 text-sm text-red-400 text-center">
-            Failed to send. Please try again.
+            {errorMsg || 'Failed to send. Please try again.'}
           </p>
           <button
             type="submit"
