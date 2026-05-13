@@ -12,7 +12,7 @@ export default function HomePage() {
 
   const stats = [
     { value: '24/7', label: t.stats.threatMonitoring },
-    { value: '3', label: t.stats.servicePillars },
+    { value: '5', label: t.stats.servicePillars },
     { value: '100%', label: t.stats.clientFocus },
     { value: 'Global', label: t.stats.coverage },
   ]

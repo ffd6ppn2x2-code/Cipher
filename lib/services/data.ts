@@ -62,17 +62,136 @@ export const serviceCategories: ServiceCategory[] = [
         cipherValue:
           "Cipher helps organizations implement structured vendor risk programs, enabling consistent assessments, ongoing oversight, and risk-informed decision-making.",
       },
+    ],
+  },
+  {
+    slug: 'managed-security-operations-center',
+    title: 'Managed Security Operations Center',
+    shortTitle: 'MSOC',
+    tagline: 'Continuous Protection. Advanced Detection. Swift Response.',
+    icon: 'monitor',
+    description:
+      "In today's rapidly evolving threat landscape, cyber risks can emerge at any moment. Organizations require 24/7 vigilance, intelligence-driven monitoring, and rapid incident response to stay ahead of attackers. Cipher's Managed Security Operations Center (MSOC) delivers a fully managed, proactive security solution that safeguards your digital environment, detects anomalies, and mitigates threats before they escalate.",
+    offerings: [
       {
-        title: 'Managed Security Operations Center (MSOC)',
+        title: 'Intelligence-Driven Monitoring',
         description:
-          "Continuous Protection. Advanced Detection. Swift Response. In today's rapidly evolving threat landscape, Cipher's MSOC delivers fully managed, proactive security that safeguards your digital environment 24/7.",
+          "Cipher leverages SIEM, UEBA, and SOAR to continuously monitor your systems and networks. By correlating events, identifying anomalous behavior, and automating response workflows, our MSOC ensures threats are detected and neutralized in real time.",
         capabilities: [
-          "24/7 Threat Monitoring & Response",
-          "Automated Threat Response via SOAR",
-          "Behavioral Analytics with UEBA",
-          "Incident Investigation & Forensics",
-          "Proactive Threat Hunting",
-          "Reporting & Intelligence Sharing",
+          "SIEM-driven event correlation and log analysis",
+          "UEBA for anomalous user and device behavior detection",
+          "SOAR automation for accelerated incident response",
+          "Real-time threat intelligence integration",
+        ],
+      },
+      {
+        title: 'Layered Security Architecture',
+        description:
+          "Our MSOC integrates multiple security technologies into a cohesive, resilient defense. This layered approach ensures comprehensive protection across endpoints, networks, cloud, and applications.",
+        capabilities: [
+          "Next-Generation Firewalls (NGFWs)",
+          "Advanced Endpoint Protection (EDR/XDR)",
+          "Intrusion Prevention & Detection (IPS/IDS)",
+          "Cloud workload and API security monitoring",
+        ],
+      },
+      {
+        title: 'Advanced Threat Detection & Intelligence',
+        description:
+          "Cipher stays ahead of attackers by continuously analyzing emerging threats and attack patterns. Our experts map new attack vectors and proactively implement containment strategies to prevent lateral movement and minimize business impact.",
+        capabilities: [
+          "Continuous threat landscape analysis",
+          "Attack vector mapping and TTP identification",
+          "Proactive containment strategy development",
+          "Threat intelligence feeds and dark web monitoring",
+        ],
+      },
+      {
+        title: 'Scalability & Adaptability',
+        description:
+          "Cipher's MSOC grows with your organization. Whether expanding cloud workloads, adding new offices, or increasing endpoints, our services scale seamlessly without requiring heavy investments in hardware, software, or personnel.",
+        capabilities: [
+          "Elastic monitoring capacity for cloud and on-prem",
+          "Flexible deployment models tailored to your environment",
+          "No upfront infrastructure investment required",
+          "Seamless integration with existing security stacks",
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'digital-forensics-incident-response',
+    title: 'Digital Forensics & Incident Response',
+    shortTitle: 'DFIR',
+    tagline: 'Investigate, contain, and recover from cyber incidents with confidence.',
+    icon: 'search',
+    description:
+      "In today's threat landscape, breaches can happen despite preventive measures. Fast, precise, and actionable incident response is critical to minimize damage, recover systems, and preserve business continuity. Cipher's DFIR services combine deep technical expertise, advanced forensic tools, and real-world threat intelligence to deliver rapid, effective, and defensible response capabilities.",
+    offerings: [
+      {
+        title: 'Incident Response & Forensics',
+        description:
+          "Whether it's a targeted attack, ransomware outbreak, or suspicious system activity, Cipher helps organizations investigate incidents thoroughly, contain threats, and implement improvements to prevent recurrence.",
+        capabilities: [
+          "Rapid incident containment and lateral movement prevention",
+          "Endpoint and network forensic analysis",
+          "Malware and ransomware reverse engineering",
+          "Root cause analysis and attack vector identification",
+          "Regulatory and legal evidence preservation",
+        ],
+        benefits: [
+          "Minimized business impact and reduced downtime",
+          "Defensible forensic reports for auditors and regulators",
+          "Actionable intelligence to prevent recurrence",
+        ],
+      },
+      {
+        title: 'Compromise Assessment',
+        description:
+          "Modern cyber threats often operate quietly, bypassing traditional defenses. Cipher's Compromise Assessment gives enterprises a clear view into latent threats across their digital environment, combining forensic analysis, behavioral monitoring, and intelligence-driven investigation.",
+        capabilities: [
+          "Intelligence-led anomaly and IOC discovery",
+          "Deep forensic artifact and binary analysis",
+          "Endpoint, network, and cloud telemetry correlation",
+          "Prioritized remediation roadmap aligned to NIST and MITRE ATT&CK",
+        ],
+        benefits: [
+          "Detect hidden threats that evade traditional scanning",
+          "Reduce attacker dwell time",
+          "Strengthen incident readiness and overall resilience",
+        ],
+      },
+      {
+        title: 'Incident Response Retainer',
+        description:
+          "Cipher offers an Incident Response Retainer to provide pre-contracted access to our DFIR experts in the event of a cyber incident. Retainer clients benefit from guaranteed response times, predictable budgeting, and proactive preparedness.",
+        capabilities: [
+          "Guaranteed response time from experienced responders",
+          "Pre-defined retainer for cost certainty",
+          "Readiness assessments and tabletop exercises included",
+          "Ongoing threat intelligence and advisory services",
+        ],
+        benefits: [
+          "Immediate access to elite DFIR expertise",
+          "Cost predictability for emergency response",
+          "Proactive planning reduces incident impact",
+        ],
+      },
+      {
+        title: 'Tabletop Exercise (TTX)',
+        description:
+          "Cipher's Tabletop Exercise service simulates high-stakes cyber incidents in a controlled, expert-led environment. By recreating realistic attack scenarios informed by current threat intelligence, our exercises test your teams' readiness, highlight gaps, and improve organizational resilience.",
+        capabilities: [
+          "Intelligence-driven scenario planning customized to your environment",
+          "Interactive, role-based engagement across technical and executive teams",
+          "Ransomware, insider threat, APT, and data breach scenarios",
+          "Post-exercise analysis with prioritized improvement recommendations",
+        ],
+        benefits: [
+          "Validated incident response readiness",
+          "Enhanced cross-functional coordination",
+          "Actionable intelligence to improve plans and playbooks",
+          "Mapped to NIST, ISO 27001, and MITRE ATT&CK frameworks",
         ],
       },
     ],
