@@ -67,7 +67,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: 'managed-security-operations-center',
     title: 'Managed Security Operations Center',
-    shortTitle: 'MSOC',
+    shortTitle: 'Managed SOC',
     navTitle: 'Managed SOC',
     tagline: 'Continuous Protection. Advanced Detection. Swift Response.',
     icon: 'monitor',
@@ -123,7 +123,7 @@ export const serviceCategories: ServiceCategory[] = [
   {
     slug: 'digital-forensics-incident-response',
     title: 'Digital Forensics & Incident Response',
-    shortTitle: 'DFIR',
+    shortTitle: 'Digital Forensics & Incident Response',
     navTitle: 'Digital Forensics & Incident Response',
     tagline: 'Investigate, contain, and recover from cyber incidents with confidence.',
     icon: 'search',
