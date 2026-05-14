@@ -19,6 +19,7 @@ export function ContactForm() {
       const data = {
         name: (form.elements.namedItem('name') as HTMLInputElement).value,
         email: (form.elements.namedItem('email') as HTMLInputElement).value,
+        phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
         company: (form.elements.namedItem('company') as HTMLInputElement).value,
         service: (form.elements.namedItem('service') as HTMLSelectElement).value,
         message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
@@ -74,6 +75,19 @@ export function ContactForm() {
                        focus:outline-none focus:border-cipher-primary/60 transition-colors duration-150"
           />
         </div>
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-cipher-subtle uppercase tracking-wide mb-2">
+          {f.phone}
+        </label>
+        <input
+          type="tel"
+          name="phone"
+          placeholder={f.phonePlaceholder}
+          className="w-full px-4 py-3 rounded-lg bg-cipher-card border border-cipher-border
+                     text-cipher-text placeholder:text-cipher-muted text-sm
+                     focus:outline-none focus:border-cipher-primary/60 transition-colors duration-150"
+        />
       </div>
       <div>
         <label className="block text-xs font-semibold text-cipher-subtle uppercase tracking-wide mb-2">
