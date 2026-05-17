@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/lib/i18n/context'
+import { countryCodes } from '@/lib/countries'
 
 export function ContactForm() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
@@ -16,10 +17,13 @@ export function ContactForm() {
       setErrorMsg('')
 
       const form = e.currentTarget
+      const countryCode = (form.elements.namedItem('countryCode') as HTMLSelectElement).value
+      const phoneNumber = (form.elements.namedItem('phone') as HTMLInputElement).value
+      const phone = countryCode && phoneNumber ? `${countryCode} ${phoneNumber}` : phoneNumber
       const data = {
         name: (form.elements.namedItem('name') as HTMLInputElement).value,
         email: (form.elements.namedItem('email') as HTMLInputElement).value,
-        phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
+        phone,
         company: (form.elements.namedItem('company') as HTMLInputElement).value,
         service: (form.elements.namedItem('service') as HTMLSelectElement).value,
         message: (form.elements.namedItem('message') as HTMLTextAreaElement).value,
